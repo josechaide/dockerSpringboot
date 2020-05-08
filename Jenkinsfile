@@ -16,7 +16,7 @@ pipeline{
         stage('Load utils.groovy') {
             steps {
                 script{
-                    gv = load "/groovy/utils.groovy"
+                    gv = load "src/groovy/utils.groovy"
                 }
                 sh 'echo groovy utils loaded!'
             }
