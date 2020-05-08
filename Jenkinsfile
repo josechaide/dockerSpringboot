@@ -21,19 +21,18 @@ pipeline{
                 sh 'echo groovy utils loaded!'
             }
         }
-        when {
-            expression {
-                params.do_package_jar == true //Expression must evaluate booleanParams
+        stage('Mvn clean Package ') {
+            when {
+                expression {
+                    params.do_package_jar == true //Expression must evaluate booleanParams
+                }
             }
-            stage('Mvn clean Package ') {
-                steps {
-                    script{
-                        gv.buildApp()
-                    }
+            steps {
+                script{
+                    gv.buildApp()
                 }
             }
         }
-
         stage('Building docker image'){
             when {
                 expression {
