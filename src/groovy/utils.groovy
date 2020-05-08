@@ -15,7 +15,7 @@ def pushImgToDocker (){
     }
     sh '''
         echo 'Pushing fresh image to dockerHub'
-        docker tag pyapp:latest josebaubay/pyapp:latest
+        docker tag springbootapp:latest josebaubay/springbootapp:latest
         docker push josebaubay/springbootapp:latest
         docker rmi springbootapp:latest
     '''
