@@ -10,7 +10,7 @@ node{
         booleanParam(name: 'do_package_jar', defaultValue: true, description: 'Build .JAR package in local repository')
         booleanParam(name: 'do_docker_stuff', defaultValue: true, description: 'Build docker img and push it to repository')
         booleanParam(name: 'executeTests', defaultValue: true, description: 'Test fully application')
-        booleanParam(name: 'deploy_on_qa', defaultValue: false, description: 'Deploy application on QA enviroment')
+        booleanParam(name: 'deploy_on_qa', defaultValue: false, description: 'Deploy application on QA environment')
     }
     stages {
         stage('Load utils.groovy') {
