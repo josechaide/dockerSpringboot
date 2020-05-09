@@ -14,7 +14,7 @@ def pushImgToDocker (){
         echo 'Login dockerHub success...'
     }
     sh """
-        docker tag springbootapp:latest josebaubay/springbootapp:${params.VERSION}
+        docker tag springbootapp:${params.VERSION} josebaubay/springbootapp:${params.VERSION}
         docker push josebaubay/springbootapp:${params.VERSION}
         docker rmi springbootapp:${params.VERSION}
     """
