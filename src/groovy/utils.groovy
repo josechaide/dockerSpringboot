@@ -2,6 +2,7 @@ def buildApp () {
     echo 'Building the application...'
     sh "mvn clean package"
 }
+
 def buildDockerImg () {
     echo 'Building a docker image...'
     sh 'docker build -t springbootapp:latest .'
@@ -12,15 +13,14 @@ def pushImgToDocker (){
         sh "docker login -u josebaubay -p ${dockerHubPwd}"
         echo 'Login dockerHub success...'
     }
-    sh '''
-        docker tag springbootapp:latest josebaubay/springbootapp:latest
-        docker push josebaubay/springbootapp:latest
-        docker rmi springbootapp:latest
-    '''
+    sh """
+        docker tag springbootapp:latest josebaubay/springbootapp:${params.VERSION}
+        docker push josebaubay/springbootapp:${params.VERSION}
+        docker rmi springbootapp:${params.VERSION}
+    """
 }
 
 def testApp () {
-
     echo 'Testing the application...'
 }
 

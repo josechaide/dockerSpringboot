@@ -2,15 +2,16 @@ def gv
 
 pipeline{
     agent any
+
     tools {
         maven 'maven_3_6_3'
     }
     parameters{
-        choice(name: 'VERSION', choices: ['1.0.0', '2.0.0', '3.0.0'], description:'Choose release version')
-        booleanParam(name: 'do_package_jar', defaultValue: true, description: 'Build .JAR package in local repository')
-        booleanParam(name: 'do_docker_stuff', defaultValue: true, description: 'Build docker img and push it to repository')
+        choice(name: 'VERSION', choices: ['1.0.0', '2.0.0', '3.0.0','latest'], description:'Choose release version')
+        booleanParam(name: 'doJarPackage', defaultValue: true, description: 'Build .JAR package in local repository')
+        booleanParam(name: 'doDockerStuff', defaultValue: true, description: 'Build docker img and push it to repository')
         booleanParam(name: 'executeTests', defaultValue: true, description: 'Test fully application')
-        booleanParam(name: 'deploy_on_qa', defaultValue: false, description: 'Deploy application on QA environment')
+        booleanParam(name: 'deployOnQa', defaultValue: false, description: 'Deploy application on QA environment')
     }
     stages {
         stage('Load utils.groovy') {
@@ -24,7 +25,7 @@ pipeline{
         stage('Mvn clean Package ') {
             when {
                 expression {
-                    params.do_package_jar == true //Expression must evaluate booleanParams
+                    params.doJarPackage == true //Expression must evaluate booleanParams
                 }
             }
             steps {
@@ -36,7 +37,7 @@ pipeline{
         stage('Building docker image'){
             when {
                 expression {
-                    params.do_docker_stuff == true //Expression must evaluate booleanParams
+                    params.doDockerStuff == true //Expression must evaluate booleanParams
                 }
             }
             steps{
@@ -48,7 +49,7 @@ pipeline{
         stage('Pushing image to dockerHub'){
             when {
                 expression {
-                    params.do_docker_stuff == true //Expression must evaluate booleanParams
+                    params.doDockerStuff == true //Expression must evaluate booleanParams
                 }
             }
             steps{
@@ -72,7 +73,7 @@ pipeline{
         stage('Deploy on QA') {
             when {
                 expression {
-                    params.deploy_on_qa == true //Expression must evaluate booleanParams
+                    params.deployOnQa == true //Expression must evaluate booleanParams
                 }
             }
             steps {
