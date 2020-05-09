@@ -6,7 +6,7 @@ pipeline{
         maven 'maven_3_6_3'
     }
     parameters{
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description:'Choose release version')
+        choice(name: 'VERSION', choices: ['1.0.0', '2.0.0', '3.0.0'], description:'Choose release version')
         booleanParam(name: 'do_package_jar', defaultValue: true, description: 'Build .JAR package in local repository')
         booleanParam(name: 'do_docker_stuff', defaultValue: true, description: 'Build docker img and push it to repository')
         booleanParam(name: 'executeTests', defaultValue: true, description: 'Test fully application')

@@ -9,12 +9,10 @@ def buildDockerImg () {
 
 def pushImgToDocker (){
     withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerHubPwd')]){
-        echo 'Login dockerHub...'
         sh "docker login -u josebaubay -p ${dockerHubPwd}"
         echo 'Login dockerHub success...'
     }
     sh '''
-        echo 'Pushing fresh image to dockerHub'
         docker tag springbootapp:latest josebaubay/springbootapp:latest
         docker push josebaubay/springbootapp:latest
         docker rmi springbootapp:latest
