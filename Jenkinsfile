@@ -60,7 +60,10 @@ pipeline{
         }
         stage('Test application') {
             when {
-                expression { params.executeTests == true }
+                allOf {
+                        expression { params.doJarPackage == true }
+                        expression { params.executeTests == true }
+                }
             }
             steps {
                 script{
@@ -70,8 +73,9 @@ pipeline{
         }
         stage('Deploy on QA') {
             when {
-                expression {
-                    params.deployOnQa == true //Expression must evaluate booleanParams
+                allOf {
+                        expression { params.doJarPackage == true }
+                        expression { params.deployOnQa == true }
                 }
             }
             steps {
