@@ -26,7 +26,7 @@ def testApp () {
 
 def deployApp () {
     echo " Deploying springbootapp:${params.VERSION}"
-    sh "docker run --name maven-springboot -p 8081:8081 josebaubay/springbootapp:${params.VERSION}"
+    sh "docker run --name maven-springboot -d -p 8081:8081 josebaubay/springbootapp:${params.VERSION}"
 }
 
 return this
