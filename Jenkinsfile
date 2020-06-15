@@ -75,6 +75,7 @@ pipeline{
             when {
                 allOf {
                         expression { params.doJarPackage == true }
+                        expression { params.doDockerStuff == true }
                         expression { params.deployOnQa == true }
                 }
             }
