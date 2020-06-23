@@ -4,7 +4,7 @@ def buildApp () {
 }
 
 def buildDockerImg () {
-    echo 'Building a docker image...'
+    echo 'Building a docker image... test'
     sh "docker build -t springbootapp:${params.VERSION} ."
 }
 
